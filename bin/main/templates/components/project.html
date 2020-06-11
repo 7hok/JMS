@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns="http://www.w3.org/1999/xhtml" layout:decorator="~{layout}">
+
+<body>
+    <div class="content p-5  "  layout:fragment="content">
+        <form class="form-group container" action="/projects/save" method="POST">
+            <label for="">Project Name</label>
+            <br>
+            <input class="form-control" type="text" name="name" placeholder="project name">
+            <br>
+            <div class="text-right">
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
+        </form>
+        <button class="btn btn-primary" onclick="askPermission()">Subscrible</button>
+    </div>
+    <div  layout:fragment="content-js">
+      <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-messaging.js"></script>
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-analytics.js"></script>
+        <!-- <script src="/pusher/js/registerServiceWorker.js"></script> -->
+        <script>
+            // import registerServiceWorker from '/pusher/js/registerServiceWorker';
+
+        // Your web app's Firebase configuration
+                var firebaseConfig = {
+                    apiKey: "AIzaSyA-U51JnjIJos0DeYejFVedFTAzDpWDLTY",
+                    authDomain: "my-starting-web-push.firebaseapp.com",
+                    databaseURL: "https://my-starting-web-push.firebaseio.com",
+                    projectId: "my-starting-web-push",
+                    storageBucket: "my-starting-web-push.appspot.com",
+                    messagingSenderId: "313445977300",
+                    appId: "1:313445977300:web:7dbd55f12a73736744ff41",
+                    measurementId: "G-7LTN7XG7ZV"
+                };
+                // Initialize Firebase
+                firebase.initializeApp(firebaseConfig);
+                // navigator.serviceWorker
+                //     .register('/my-sw.js')
+                // .then((registration) => {
+                // firebase.messaging().useServiceWorker(registration);
+                // });
+                firebase.analytics();
+                if ('serviceWorker' in navigator) {
+                    navigator.serviceWorker.register('../firebase-messaging-sw.js')
+                .then(function(registration) {
+                    console.log('Registration successful, scope is:', registration.scope);
+                }).catch(function(err) {
+                    console.log('Service worker registration failed, error:', err);
+                });
+                }
+                const askPermission = async () => {
+                    try {
+                        const messaging = firebase.messaging();
+
+                        
+                        // messaging.setBackgroundMessageHandler(function(payload) {
+                        // console.log('[firebase-messaging-sw.js] Received background message ', payload);
+                        //     // Customize notification here
+                        //     const notificationTitle = 'Background Message Title';
+                        //     const notificationOptions = {
+                        //         body: 'Background Message body.',
+                        //         icon: '/itwonders-web-logo.png'
+                        //     };
+
+                        //     return self.registration.showNotification(notificationTitle,notificationOptions);
+                        // });
+
+                        await messaging.requestPermission();
+                        const token = await messaging.getToken();
+                        console.log('token do usuário:', token);
+                        
+                        return token;
+                    } catch (error) {
+                        console.error(error);
+                     }
+                }
+        </script>
+    </div>
+</body>
+</html>
