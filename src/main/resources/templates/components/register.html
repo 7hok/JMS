@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns="http://www.w3.org/1999/xhtml" layout:decorator="~{layout}">
+
+<body>
+    <div class="content p-5  "  layout:fragment="content">
+        <form class="form-group container" action="/apps/save" method="POST">
+            <label for="">App Name</label>
+            <br>
+            <input class="form-control" type="text" name="name" placeholder="project name">
+            <br>
+            <label for="">AuthorizedKey</label>
+            <br>
+            <input class="form-control" type="text" name="authorizedKey" placeholder="project name">
+            <br>
+            <label for="">AuthorizedKey</label>
+            <select class="form-control" name="project" id="">
+                <option th:each="PROJECT : ${PROJECTS}" th:value="${PROJECT.getId()}" th:text="${PROJECT.getName()}"></option>
+            </select>
+            <br>
+            <div class="text-right">
+                <button class="btn btn-primary " type="submit">Submit</button>
+            </div>
+            
+        </form>
+    </div>
+    <div  layout:fragment="content-js">
+      
+    </div>
+</body>
+</html>

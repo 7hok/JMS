@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns="http://www.w3.org/1999/xhtml" layout:decorator="~{layout}">
+
+<body>
+    <div class="content"  layout:fragment="content">
+        <style>
+            .project-div {
+                background-size:cover;
+                background-repeat: no-repeat;
+                border-radius: 45px;
+            }
+        </style>
+        <div class="wrap">
+            <!--header-->
+            <div th:replace="~{/fragments/header}">
+                
+            </div>
+            <!--// header-->
+        
+            <!-- container -->
+            <div class="container">
+                <!-- cnt_inner -->
+                <div class="cnt_inner">
+                    <!-- app_box_wrap -->
+                    <div class="app_box_wrap cboth">
+                        <div class="app_box projectTopDiv" th:each="APPLICATION : ${APPLICATIONS}" th:data-id="${APPLICATION.getId()}">
+                            <a  class="app_img"><img src="/pusher/img/tmp/temp_appicon1.png" alt=""></a>
+                            <p class="app_name" title="Bizcard" th:text="${APPLICATION.getName()}">Bizcard</p>
+                            <!-- <span class="app_num" style="display:block;">4</span> -->
+                        </div>
+        
+                        <div class="app_box add_app border">
+                            <a href="#none" class="app_img" data-toggle="modal" data-target="#myModal"><img src="/pusher/img/bg/appicon_add.png" alt=""></a>
+                        </div>
+                        <!-- //add_app -->
+                    </div>
+                    <!-- add_app -->
+
+                    
+                    <!-- //folder_wrap -->
+                </div>
+                <!-- //cnt_inner -->
+            </div>
+            <!--//container -->
+        </div>
+        <div class="modal fade " id="myModal">
+          
+                <div class="pop_wrap modal-dialog">
+                    <div class="pop_inner">
+                        <!-- pop_header -->
+                        <div class="pop_header">
+                            <h3>App Registration</h3>
+                            <a href="#none" class="btn_x"><span class="blind">Close</span></a>
+                        </div>
+                        <!-- //pop_header -->
+            
+                        <!-- pop_container -->
+                        <div class="pop_container">
+            
+                            <!-- app register box -->
+                            <div class="app_reg_box mgt4">
+            
+                                <div class="avatar_upload mgb30">
+                                    <div class="avatar_edit">
+                                        <input type="file" id="imageUpload">
+                                        <label for="imageUpload" class=""></label>
+                                    </div>
+                                    <div class="avatar_preview">
+                                        <div class="imagePreview" style="background-image:url(/pusher/img/bg/bg_upload.png);"></div>
+                                    </div>
+                                </div>
+            
+                                <p class="app_id_wrap">
+                                    Your app ID:
+                                    <span class="txt_app_id">1df4d-34ft4-32dsx-43dfs</span>
+                                </p>
+                            </div>
+                            <!-- //app register box -->
+            
+                            <div class="form">
+                                <div class="form_group"><!-- [D]error 경우 class="error" -->
+                                    <label for="" class="blind">App Name</label>
+                                    <input type="text" id="" value="" placeholder="Enter App Name" class="chck">
+                                    <p class="error_msg">Error message</p>
+                                    <a href="#none" class="btn_app_chk disable">Check</a><!-- [D]버튼 비활성일 경우 class="disable" -->
+                                </div>
+                            </div>
+            
+                            <!-- btn_wrap -->
+                            <div class="btn_wrap">
+                                <a href="#none" class="btn_blue1 disable">REGISTER</a><!-- [D]버튼 비활성일 경우 class="disable" -->
+                            </div>
+                            <!-- //btn_wrap -->
+                        </div>
+                        <!-- //pop_container -->
+                    </div>
+                </div>
+           
+        </div>
+    </div>
+    <div  layout:fragment="content-js">
+      
+    </div>
+</body>
+</html>
